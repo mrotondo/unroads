@@ -1,6 +1,7 @@
 import json
 import googlemaps
 import pandas as pd
+from decouple import config
 
 # Download from https://data.sfgov.org/w/razy-xert/ikek-yizv and replace local path with yours
 lots_csv = open("/Users/mikerotondo/Downloads/LandUse2016.csv")
@@ -18,7 +19,7 @@ def random_res_weighted_address():
   address = str.format("{0} {1} {2}, San Francisco CA", number, street, street_type)
   return address
 
-gmaps = googlemaps.Client(key='AIzaSyAIS6YAVzijaOC5xNPcPtypE1RSw6gjbj0')
+gmaps = googlemaps.Client(key=config('GOOGLE_MAPS_API_KEY'))
 num_routes = 100000
 with open('sf_routes.json', mode='a') as routes_file:
   for i in range(num_routes):
